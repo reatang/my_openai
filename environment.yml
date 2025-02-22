@@ -1,0 +1,3 @@
+name: my_openai_env
+channels:
+  - conda-forge

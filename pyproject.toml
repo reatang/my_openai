@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_openai"
+version = "0.1.0"
+description = "A modern Python project for interacting with OpenAI APIs"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.dependencies]
+python = ">=3.12"
+openai = "1.63.2"
+requests = "2.32.3"
+pytest = "8.3.4"
+python-dotenv = "1.0.1"
+ruff = "0.9.7"
+tiktoken = "0.9.0"
+
+[project.urls]
+"Homepage" = "https://github.com/reatang/my_openai"
+"Bug Tracker" = "https://github.com/reatang/my_openai/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--strict",
+    "--markers", "slow",
+]
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 120
+select = ["E", "W", "F", "I", "N", "B", "C4", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.per-file-ignores]
+"tests/**/*" = ["S101"]
+"__init__.py" = ["F401"]

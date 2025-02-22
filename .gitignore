@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.eggs/
+dist/
+sdist/
+*.egg-info/
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written into a dist/ directory, but be sure to ignore them if they are lying around
+build/
+*.spec
+
+# Others
+.Python
+env/
+.env
+venv/
+*.log
+*.bak
+*~
+# VS Code
+.vscode/
