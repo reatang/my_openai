@@ -1,4 +1,6 @@
 
+from pydantic import BaseModel
+
 from my_openai.tools import get_courses, get_course_info, get_student_info
 
 tool_map = {
@@ -49,6 +51,7 @@ openai_tool_calls = [
         }
     }
 ]
+
 
 __all__ = [
     "tool_map",

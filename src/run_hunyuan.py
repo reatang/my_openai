@@ -1,6 +1,7 @@
 import openai
 import os
 import json
+import rich
 from dotenv import load_dotenv
 
 from my_openai import tool_map, openai_tool_calls
@@ -45,11 +46,16 @@ def run_agent(prompt):
 
         messages.append(choice.message)
         for tool_call in choice.message.tool_calls: # <-- tool_calls 可能是多个，因此我们使用循环逐个执行
-            tool_call_name = tool_call.function.name
-            tool_call_arguments = json.loads(tool_call.function.arguments) # <-- arguments 是序列化后的 JSON Object，我们需要使用 json.loads 反序列化一下
-            tool_function = tool_map[tool_call_name] # <-- 通过 tool_map 快速找到需要执行哪个函数
-            tool_result = tool_function(**tool_call_arguments)
- 
+            
+            if isinstance(tool_call, openai.types.chat.ChatCompletionMessageToolCall):
+                # ChatCompletionMessage 格式的 tool_call 包含了函数的名称和参数
+                tool_call_name = tool_call.function.name
+                tool_call_arguments = json.loads(tool_call.function.arguments) # <-- arguments 是序列化后的 JSON Object，我们需要使用 json.loads 反序列化一下
+                tool_function = tool_map[tool_call_name] # <-- 通过 tool_map 快速找到需要执行哪个函数
+                tool_result = tool_function(**tool_call_arguments)
+            else:
+                raise ValueError(f"Unknown tool call type: {type(tool_call)}")
+    
             messages.append({
                 "role": "tool",
                 "tool_call_id": tool_call.id,

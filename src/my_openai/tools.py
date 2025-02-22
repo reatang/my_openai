@@ -26,8 +26,8 @@ def get_courses():
     return list(class_courses.keys())
 
 def get_course_info(course_id: int):
-    course = class_courses[course_id]
-    students = course_students[course_id]
+    course = class_courses.get(course_id, "Unknown")
+    students = course_students.get(course_id, [])
 
     return {
         "id": course_id,
@@ -36,7 +36,7 @@ def get_course_info(course_id: int):
     }
 
 def get_student_info(student_id: int):
-    student = students[student_id]
+    student = students.get(student_id, "Unknown")
 
     return {
         "id": student_id,

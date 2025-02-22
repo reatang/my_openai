@@ -19,11 +19,13 @@ classifiers = [
 [project.dependencies]
 python = ">=3.12"
 openai = "1.63.2"
+pydantic = "2.10.6"
 requests = "2.32.3"
 pytest = "8.3.4"
 python-dotenv = "1.0.1"
 ruff = "0.9.7"
 tiktoken = "0.9.0"
+rich = "13.9.4"
 
 [project.urls]
 "Homepage" = "https://github.com/reatang/my_openai"
