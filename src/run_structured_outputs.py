@@ -59,8 +59,16 @@ class Query(BaseModel):
     class_id: int
     student_id: int
 
+class WebSearch(BaseModel):
+    """
+    Search the web for information.
+    """
+    search: str
+
 def tool_calls_output():
     system_prompt = """你是一个结构化输出的工具. 请为工具`query`解析输入内容中的关键参数."""
+
+    # 注意 结构化输出 `parse`
     completion = client.beta.chat.completions.parse(
         model="hunyuan-large",
         messages=[
@@ -69,7 +77,8 @@ def tool_calls_output():
         ],
         tools=[
             # 据测试 pydantic_function_tool 仅用于结构化输出的tool_calls，真实的功能型 tool_calls 仅用于描述工具的入参
-            pydantic_function_tool(Query, name="query", description="查询学生在班级中的信息.")
+            pydantic_function_tool(Query, name="query", description="查询学生在班级中的信息."),
+            pydantic_function_tool(WebSearch, name="web_search")
         ]
     )
 

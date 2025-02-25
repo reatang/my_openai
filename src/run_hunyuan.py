@@ -32,11 +32,11 @@ def run_agent(prompt):
             messages=messages,
             tools=openai_tool_calls,
             extra_body={
-                "enable_enhancement": True, # <- 自定义参数
+                # "enable_enhancement": True, # <- 自定义参数
             },
         )
 
-        print(chat_completion)
+        rich.print(chat_completion)
 
         choice = chat_completion.choices[0]
 
